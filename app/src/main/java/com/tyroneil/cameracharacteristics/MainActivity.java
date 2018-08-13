@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.util.Size;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -67,13 +71,13 @@ public class MainActivity extends Activity {
                         + repStr(" ", 2 * 1) + "# Shutter Parameters #" + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_EXPOSURE_TIME_RANGE (nanosecond): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_SENSITIVITY_RANGE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE) + "\n"
-                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_APERTURES: " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_APERTURES)) + "\n"
                         + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_FOCUS_DISTANCE_CALIBRATION: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_FOCUS_DISTANCE_CALIBRATION) + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_HYPERFOCAL_DISTANCE (units of diopter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_HYPERFOCAL_DISTANCE) + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_MINIMUM_FOCUS_DISTANCE (units of diopter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE) + "\n"
                         + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_FOCAL_LENGTHS (millimeter): " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)) + "\n"
+                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_APERTURES: " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_APERTURES)) + "\n"
                         + "\n"
 
                         + repStr(" ", 2 * 1) + "# Hardware Information #" + "\n"
@@ -93,14 +97,23 @@ public class MainActivity extends Activity {
                 );
 
                 // transfer SCALER_STREAM_CONFIGURATION_MAP data into plan text
+                Comparator<Size> sizesComparator = new Comparator<Size>() {
+                    @Override
+                    public int compare(Size size1, Size size0) {
+                        return Integer.compare(size0.getWidth() * size0.getHeight(), size1.getWidth() * size1.getHeight());
+                    }
+                };
                 camChaOut += (
                         repStr(" ", 2 * 2) + "SCALER_STREAM_CONFIGURATION_MAP: " + "\n"
                         + repStr(" ", 2 * 3) + "Output Formats: " + "\n"
                         + repStr(" ", 2 * 4) + traIntArr((camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputFormats()) + "\n"
                 );
                 int counter = 0;
+                ArrayList<Size> outputSizes;
                 camChaOut += repStr(" ", 2 * 3) + "Output Sizes (RAW_SENSOR): {" + "\n";
-                for (Size e : (camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(32)) {
+                outputSizes = new ArrayList<>(Arrays.asList((camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(32)));
+                outputSizes.sort(sizesComparator);
+                for (Size e : outputSizes) {
                     camChaOut += (
                             repStr(" ", 2 * 4) + String.format("%3d", counter) + ". " + e
                             + "  " + String.format("%.2f", (float) (e.getWidth() * e.getHeight()) / 1000000) + "MP"
@@ -109,7 +122,9 @@ public class MainActivity extends Activity {
                 } camChaOut += repStr(" ", 2 * 4) + "}\n";
                 counter = 0;
                 camChaOut += repStr(" ", 2 * 3) + "Output Sizes (JPEG): {" + "\n";
-                for (Size e : (camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(256)) {
+                outputSizes = new ArrayList<>(Arrays.asList((camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(256)));
+                outputSizes.sort(sizesComparator);
+                for (Size e : outputSizes) {
                     camChaOut += (
                             repStr(" ", 2 * 4) + String.format("%3d", counter) + ". " + e
                             + "  " + String.format("%.2f", (float) (e.getWidth() * e.getHeight()) / 1000000) + "MP"
@@ -118,7 +133,9 @@ public class MainActivity extends Activity {
                 } camChaOut += repStr(" ", 2 * 4) + "}\n";
                 counter = 0;
                 camChaOut += repStr(" ", 2 * 3) + "Output Sizes (SurfaceTexture): {" + "\n";
-                for (Size e : (camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(SurfaceTexture.class)) {
+                outputSizes = new ArrayList<>(Arrays.asList((camCha.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)).getOutputSizes(SurfaceTexture.class)));
+                outputSizes.sort(sizesComparator);
+                for (Size e : outputSizes) {
                     camChaOut += (
                             repStr(" ", 2 * 4) + String.format("%3d", counter) + ". " + e
                             + "  " + String.format("%.2f", (float) (e.getWidth() * e.getHeight()) / 1000000) + "MP"
