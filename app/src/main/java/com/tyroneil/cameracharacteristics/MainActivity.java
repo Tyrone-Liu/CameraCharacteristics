@@ -40,17 +40,17 @@ public class MainActivity extends Activity {
              * SENSOR_INFO_EXPOSURE_TIME_RANGE (nanosecond)
              * SENSOR_INFO_SENSITIVITY_RANGE
              * LENS_INFO_AVAILABLE_APERTURES {float[]}
+             * CONTROL_AWB_AVAILABLE_MODES {int[]}
+             * LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION {int[]}
+             * LENS_INFO_AVAILABLE_FOCAL_LENGTHS (millimeter) {float[]}
              *
              * LENS_INFO_FOCUS_DISTANCE_CALIBRATION
              * LENS_INFO_HYPERFOCAL_DISTANCE (units of diopter)
              * LENS_INFO_MINIMUM_FOCUS_DISTANCE (units of diopter)
              *
-             * LENS_INFO_AVAILABLE_FOCAL_LENGTHS (millimeter) {float[]}
-             *
              * # hardware information
              * INFO_SUPPORTED_HARDWARE_LEVEL
              * REQUEST_AVAILABLE_CAPABILITIES {int[]}
-             * LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION {int[]}
              *
              * SENSOR_INFO_PHYSICAL_SIZE (millimeter)
              * SENSOR_INFO_PIXEL_ARRAY_SIZE (pixel)
@@ -71,19 +71,19 @@ public class MainActivity extends Activity {
                         + repStr(" ", 2 * 1) + "# Shutter Parameters #" + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_EXPOSURE_TIME_RANGE (nanosecond): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_SENSITIVITY_RANGE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE) + "\n"
+                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_APERTURES: " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_APERTURES)) + "\n"
+                        + repStr(" ", 2 * 2) + "CONTROL_AWB_AVAILABLE_MODES: " + "\n" + repStr(" ", 2 * 3) + traIntArr(camCha.get(CameraCharacteristics.CONTROL_AWB_AVAILABLE_MODES)) + "\n"
+                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION: " + "\n" + repStr(" ", 2 * 3) + traIntArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION)) + "\n"
+                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_FOCAL_LENGTHS (millimeter): " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)) + "\n"
                         + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_FOCUS_DISTANCE_CALIBRATION: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_FOCUS_DISTANCE_CALIBRATION) + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_HYPERFOCAL_DISTANCE (units of diopter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_HYPERFOCAL_DISTANCE) + "\n"
                         + repStr(" ", 2 * 2) + "LENS_INFO_MINIMUM_FOCUS_DISTANCE (units of diopter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE) + "\n"
                         + "\n"
-                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_FOCAL_LENGTHS (millimeter): " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)) + "\n"
-                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_APERTURES: " + "\n" + repStr(" ", 2 * 3) + traFloArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_APERTURES)) + "\n"
-                        + "\n"
 
                         + repStr(" ", 2 * 1) + "# Hardware Information #" + "\n"
                         + repStr(" ", 2 * 2) + "INFO_SUPPORTED_HARDWARE_LEVEL: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL) + "\n"
                         + repStr(" ", 2 * 2) + "REQUEST_AVAILABLE_CAPABILITIES: " + "\n" + repStr(" ", 2 * 3) + traIntArr(camCha.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)) + "\n"
-                        + repStr(" ", 2 * 2) + "LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION: " + "\n" + repStr(" ", 2 * 3) + traIntArr(camCha.get(CameraCharacteristics.LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION)) + "\n"
                         + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PHYSICAL_SIZE (millimeter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PIXEL_ARRAY_SIZE (pixel): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE) + "\n"
