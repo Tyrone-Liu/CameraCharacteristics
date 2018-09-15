@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
              * SENSOR_INFO_ACTIVE_ARRAY_SIZE {Rect}
              * SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE {Rect}
              *
+             * SENSOR_INFO_TIMESTAMP_SOURCE
+             *
              * # other
              * LENS_FACING
              * SENSOR_ORIENTATION
@@ -89,6 +91,8 @@ public class MainActivity extends Activity {
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PIXEL_ARRAY_SIZE (pixel): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_ACTIVE_ARRAY_SIZE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE) + "\n"
+                        + "\n"
+                        + repStr(" ", 2 * 2) + "SENSOR_INFO_TIMESTAMP_SOURCE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE) + "\n"
                         + "\n"
 
                         + repStr(" ", 2 * 1) + "# Other #" + "\n"
