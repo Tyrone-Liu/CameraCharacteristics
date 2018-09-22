@@ -32,7 +32,8 @@ public class MainActivity extends Activity {
             camChaOut += "Camera Id List: {";
             for (String e : cameraIdList) {
                 camChaOut += e + ", ";
-            } camChaOut += "}\n" + "\n\n";
+            }
+            camChaOut += "}\n" + "\n\n";
 
             /**required information
              *
