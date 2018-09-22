@@ -2,8 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material">
-        <!-- Customize your theme here. -->
         <item name="android:textAllCaps">false</item>
+        <item name="android:navigationBarColor">@color/colorSurface</item>
     </style>
 
 </resources>
