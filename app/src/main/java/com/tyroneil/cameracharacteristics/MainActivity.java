@@ -55,8 +55,10 @@ public class MainActivity extends Activity {
              *
              * SENSOR_INFO_PHYSICAL_SIZE (millimeter)
              * SENSOR_INFO_PIXEL_ARRAY_SIZE (pixel)
-             * SENSOR_INFO_ACTIVE_ARRAY_SIZE {Rect}
+             *
+             * DISTORTION_CORRECTION_AVAILABLE_MODES
              * SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE {Rect}
+             * SENSOR_INFO_ACTIVE_ARRAY_SIZE {Rect}
              *
              * SENSOR_INFO_TIMESTAMP_SOURCE
              *
@@ -90,8 +92,10 @@ public class MainActivity extends Activity {
                         + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PHYSICAL_SIZE (millimeter): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PIXEL_ARRAY_SIZE (pixel): " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE) + "\n"
-                        + repStr(" ", 2 * 2) + "SENSOR_INFO_ACTIVE_ARRAY_SIZE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE) + "\n"
+                        + "\n"
+                        + repStr(" ", 2 * 2) + "DISTORTION_CORRECTION_AVAILABLE_MODES: " + "\n" + repStr(" ", 2 * 3) + traIntArr(camCha.get(CameraCharacteristics.DISTORTION_CORRECTION_AVAILABLE_MODES)) + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE) + "\n"
+                        + repStr(" ", 2 * 2) + "SENSOR_INFO_ACTIVE_ARRAY_SIZE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE) + "\n"
                         + "\n"
                         + repStr(" ", 2 * 2) + "SENSOR_INFO_TIMESTAMP_SOURCE: " + "\n" + repStr(" ", 2 * 3) + camCha.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE) + "\n"
                         + "\n"
@@ -158,16 +162,24 @@ public class MainActivity extends Activity {
 
     private static String traFloArr(float[] camChaValue) {
         String output = "{";
-        for (float e : camChaValue) {
-            output += e + ", ";
+        if (camChaValue != null) {
+            for (float e : camChaValue) {
+                output += e + ", ";
+            }
+        } else {
+            output += "null";
         } output += "}";
         return output;
     }
 
     private static String traIntArr(int[] camChaValue) {
         String output = "{";
-        for (int e : camChaValue) {
-            output += e + ", ";
+        if (camChaValue != null) {
+            for (int e : camChaValue) {
+                output += e + ", ";
+            }
+        } else {
+            output += "null";
         } output += "}";
         return output;
     }
